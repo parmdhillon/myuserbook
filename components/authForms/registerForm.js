@@ -2,7 +2,7 @@ import React from 'react';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-const RegisterForm = () => {
+const RegisterForm = ({ callbackHandler }) => {
   const {
     register,
     handleSubmit,
@@ -10,10 +10,10 @@ const RegisterForm = () => {
     watch,
   } = useForm();
 
+  const onSubmit = (data) => callbackHandler(data);
+
   const password = useRef({});
   password.current = watch('password', '');
-
-  const onSubmit = (data) => console.log(data);
 
   return (
     <form

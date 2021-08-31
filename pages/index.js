@@ -1,8 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import RegisterForm from '../components/authForms/registerForm';
+import Spinner from '../components/Spinner/Spinner';
 
 export default function RegisterUser() {
+  const [loading, setLoading] = useState(false);
+
+  const handleRegistration = (userData) => {
+    setLoading(!loading);
+  };
+
   return (
     <>
       <Head>
@@ -21,7 +29,13 @@ export default function RegisterUser() {
             </div>
             <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-20 px-8 md:px-24 lg:px-32">
               <p className="text-center text-3xl">Register</p>
-              <RegisterForm />
+              {loading ? (
+                <div className="my-36">
+                  <Spinner />
+                </div>
+              ) : (
+                <RegisterForm callbackHandler={handleRegistration} />
+              )}
               <div className="text-center pt-12 pb-12">
                 <p>
                   Already have an account?&nbsp;
