@@ -6,10 +6,37 @@ import Spinner from '../components/Spinner/Spinner';
 
 export default function RegisterUser() {
   const [loading, setLoading] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
-  const handleRegistration = (userData) => {
-    setLoading(!loading);
+  const handleRegistration = async (userData) => {
+    setLoading((loading) => !loading);
+    try {
+      const result = await createUser(userData);
+      console.log(result);
+    } catch (error) {
+      alert(error.message);
+    }
+    setIsRegistered((isRegistered) => !isRegistered);
+    setLoading((loading) => !loading);
   };
+
+  async function createUser(userData) {
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Something went wrong!');
+    }
+
+    return data;
+  }
 
   return (
     <>
@@ -30,11 +57,11 @@ export default function RegisterUser() {
             <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-20 px-8 md:px-24 lg:px-32">
               <p className="text-center text-3xl">Register</p>
               {loading ? (
-                <div className="my-36">
-                  <Spinner />
-                </div>
-              ) : (
+                <Spinner cssClass="my-36" />
+              ) : !isRegistered ? (
                 <RegisterForm callbackHandler={handleRegistration} />
+              ) : (
+                'Registration Success'
               )}
               <div className="text-center pt-12 pb-12">
                 <p>
