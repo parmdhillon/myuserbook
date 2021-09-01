@@ -8,10 +8,10 @@ import Spinner from '../components/Spinner/Spinner';
 
 export default function RegisterUser() {
   const [loading, setLoading] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [registerResults, setRegisterResults] = useState(false);
-  const errorMessage = useRef(null);
-  const fullName = useRef(null);
+  const [isRegistered, setIsRegistered] = useState(false); //to check if user is registering
+  const [registerResults, setRegisterResults] = useState(false); //to store results of registering i.e; success or failure
+  const errorMessage = useRef(null); //stores any error message from API
+  const fullName = useRef(null); //stores User's Name after successfull registration
 
   const handleRegistration = async (userData) => {
     setLoading((loading) => !loading);
