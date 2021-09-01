@@ -76,6 +76,10 @@ const RegisterForm = ({ callbackHandler }) => {
               value: 8,
               message: 'Password must have at least 8 characters',
             },
+            maxLength: {
+              value: 30,
+              message: 'Password must not exceed 30 characters',
+            },
           })}
           placeholder="Password"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"

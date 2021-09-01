@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaRedoAlt } from '@react-icons/all-files/fa/FaRedoAlt';
 import { FaSignInAlt } from '@react-icons/all-files/fa/FaSignInAlt';
+import Link from 'next/link';
 
 const RegisterStatus = ({ status, message, fullName }) => {
   return (
@@ -14,9 +15,11 @@ const RegisterStatus = ({ status, message, fullName }) => {
             <b className="text-gray-500">{fullName}</b> now, you can login with
             your credentials
           </p>
-          <button className="bg-black w-full text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
-            <FaSignInAlt className="inline" /> Login
-          </button>
+          <Link href="/login">
+            <a className="block bg-black w-full text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+              <FaSignInAlt className="inline" /> Login
+            </a>
+          </Link>
         </>
       ) : (
         <>

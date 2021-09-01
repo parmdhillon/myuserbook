@@ -47,8 +47,8 @@ async function handler(req, res) {
     const db = client.db();
     const existingUser = await db.collection('users').findOne({ email: email });
     if (existingUser) {
+      console.log('User existed');
       res.status(422).json({ message: 'User exists already!' });
-      client.close();
       return;
     }
     const hashedPassword = await encryptPassword(password);
@@ -58,11 +58,10 @@ async function handler(req, res) {
       email: email,
       password: hashedPassword,
     });
-
-    client.close();
     res.status(201).json({ message: 'Created user!', data: value });
   } catch (error) {
-    res.status(422).json({ message: 'Something went wrong!' });
+    //console.log(error.message);
+    res.status(422).json({ message: 'Something is wrong!' });
   }
 }
 export default handler;

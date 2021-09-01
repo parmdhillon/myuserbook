@@ -8,9 +8,8 @@ import Spinner from '../components/Spinner/Spinner';
 
 export default function RegisterUser() {
   const [loading, setLoading] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false); //to check if user is registering
-  const [registerResults, setRegisterResults] = useState(false); //to store results of registering i.e; success or failure
-  const errorMessage = useRef(null); //stores any error message from API
+  const [registerStatus, setRegisterStatus] = useState(null); //to store results of registering i.e; success or failure
+  const [errorMessage, setErrorMessage] = useState(null);
   const fullName = useRef(null); //stores User's Name after successfull registration
 
   const handleRegistration = async (userData) => {
@@ -18,11 +17,11 @@ export default function RegisterUser() {
     try {
       const result = await createUser(userData);
       fullName.current = result.data.fullName;
-      setRegisterResults(true);
+      setRegisterStatus(true);
     } catch (error) {
-      errorMessage.current = error.message;
+      setRegisterStatus(false);
+      setErrorMessage(error.message);
     }
-    setIsRegistered((isRegistered) => !isRegistered);
     setLoading((loading) => !loading);
   };
 
@@ -63,15 +62,15 @@ export default function RegisterUser() {
             <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-20 px-8 md:px-24 lg:px-32">
               <p className="text-center text-3xl">Register</p>
               {loading ? (
-                <Spinner cssClass="my-36" />
-              ) : !isRegistered ? (
-                <RegisterForm callbackHandler={handleRegistration} />
-              ) : (
+                <Spinner />
+              ) : registerStatus != null ? (
                 <RegisterStatus
-                  status={registerResults}
-                  message={errorMessage.current}
+                  status={registerStatus}
+                  message={errorMessage}
                   fullName={fullName.current}
                 />
+              ) : (
+                <RegisterForm callbackHandler={handleRegistration} />
               )}
               <div className="text-center pt-12 pb-12">
                 <p>
