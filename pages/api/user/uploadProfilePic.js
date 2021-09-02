@@ -14,12 +14,16 @@ handler.post(async (req, res) => {
       req.files.profilePic[0].path,
       function (error, result) {
         console.log(result, error);
+        if (error) {
+          res.status(400).json({ message: 'Something went wrong!', error });
+          return;
+        }
+        res.status(200).json({ message: 'OK!', result });
       }
     );
   } catch (error) {
     console.log(error);
   }
-  res.status(200).json({ message: 'OK!' });
 });
 
 export const config = {
