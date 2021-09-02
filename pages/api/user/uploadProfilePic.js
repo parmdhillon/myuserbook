@@ -9,12 +9,16 @@ handler.post(async (req, res) => {
   //console.log(req.body);
   console.log(req.files);
 
-  cloudinary.uploader.upload(
-    req.files.profilePic[0].path,
-    function (error, result) {
-      console.log(result, error);
-    }
-  );
+  try {
+    cloudinary.uploader.upload(
+      req.files.profilePic[0].path,
+      function (error, result) {
+        console.log(result, error);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
   res.status(200).json({ message: 'OK!' });
 });
 
