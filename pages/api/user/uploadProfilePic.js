@@ -1,5 +1,4 @@
 const cloudinary = require('cloudinary').v2;
-const streamifier = require('streamifier');
 import middleware from '../../../middlewares/middleware';
 import nextConnect from 'next-connect';
 
