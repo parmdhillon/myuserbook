@@ -18,7 +18,7 @@ const schema = Joi.object({
   password: Joi.string().required().label('Password'),
   confirm_password: Joi.ref('password'),
   userName: Joi.string()
-    .regex(/^[ A-Za-z]+$/)
+    .regex(/^[ A-Za-z0-9]+$/)
     .min(3)
     .max(20)
     .required()
@@ -66,6 +66,8 @@ async function handler(req, res) {
       lastName,
       userName,
       password: hashedPassword,
+      address: null,
+      profilePic: null,
     });
     res.status(201).json({ message: 'Created user!', data: value });
   } catch (error) {

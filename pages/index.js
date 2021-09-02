@@ -68,7 +68,7 @@ export default function RegisterUser() {
                 <RegisterStatus
                   status={registerStatus}
                   message={errorMessage}
-                  firstName
+                  firstName={firstName.current}
                 />
               ) : (
                 <RegisterForm callbackHandler={handleRegistration} />

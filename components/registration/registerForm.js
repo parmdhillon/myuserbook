@@ -93,7 +93,7 @@ const RegisterForm = ({ callbackHandler }) => {
               message: 'Your Username should contain more than 3 letters',
             },
             pattern: {
-              value: /^[A-Za-z ]+$/i,
+              value: /^[A-Za-z0-9 ]+$/i,
               message: 'Only numbers and letters are allowed.',
             },
           })}

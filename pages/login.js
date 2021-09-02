@@ -34,6 +34,7 @@ const Login = () => {
       body: JSON.stringify({ userName, password }),
     }).catch((error) => {
       throw new Error(error.message || 'Something went wrong!');
+      return;
     });
     let result = await loginApi.json();
     if (result.token) {
@@ -49,7 +50,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>Login to your Account</title>
+      </Head>
       <div className="w-full flex flex-wrap">
         <div className="w-full md:w-1/2 flex flex-col">
           <div className="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
@@ -88,7 +92,7 @@ const Login = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
