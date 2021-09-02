@@ -6,6 +6,7 @@ import LoginForm from '../components/login/loginForm';
 import Spinner from '../components/Spinner/Spinner';
 import Router from 'next/router';
 import LoginErrorCard from '../components/login/loginError';
+import { getCookieToken, verifyToken } from '../lib/utils';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -90,5 +91,24 @@ const Login = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const token = getCookieToken(req);
+  let profile = verifyToken(token);
+
+  if (profile) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default Login;

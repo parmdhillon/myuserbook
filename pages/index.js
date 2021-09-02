@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import RegisterForm from '../components/registration/registerForm';
 import RegisterStatus from '../components/registration/registerStatus';
 import Spinner from '../components/Spinner/Spinner';
+import { getCookieToken, verifyToken } from '../lib/utils';
 
 export default function RegisterUser() {
   const [loading, setLoading] = useState(false);
@@ -95,4 +96,23 @@ export default function RegisterUser() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const token = getCookieToken(req);
+  let profile = verifyToken(token);
+
+  if (profile) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
