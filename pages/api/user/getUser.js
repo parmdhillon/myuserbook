@@ -1,5 +1,5 @@
 import clientPromise from '../../../lib/db';
-import { verifyToken, getCookieToken, signoutUser } from '../../../lib/utils';
+import { verifyToken, getCookieToken } from '../../../lib/utils';
 
 export default async (req, res) => {
   const token = getCookieToken(req);
@@ -21,8 +21,8 @@ export default async (req, res) => {
       });
     }
   } else {
-    return res.status(400).json({
-      message: 'Bad Request',
+    return res.status(401).json({
+      message: 'Not Authorized',
     });
   }
 };
