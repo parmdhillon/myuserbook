@@ -3,7 +3,7 @@ import { FaRedoAlt } from '@react-icons/all-files/fa/FaRedoAlt';
 import { FaSignInAlt } from '@react-icons/all-files/fa/FaSignInAlt';
 import Link from 'next/link';
 
-const RegisterStatus = ({ status, message, fullName }) => {
+const RegisterStatus = ({ status, message, firstName }) => {
   return (
     <div className="my-6 text-center w-full border-2 border-gray-400 rounded-2xl p-10 shadow-xl">
       {status ? (
@@ -12,7 +12,7 @@ const RegisterStatus = ({ status, message, fullName }) => {
             Registration Successful!
           </span>
           <p>
-            <b className="text-gray-500">{fullName}</b> now, you can login with
+            <b className="text-gray-500">{firstName}</b> now, you can login with
             your credentials
           </p>
           <Link href="/login">

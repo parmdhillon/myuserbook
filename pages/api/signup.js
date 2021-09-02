@@ -3,19 +3,26 @@ import { encryptPassword } from '../../lib/passwordHash';
 const Joi = require('joi');
 
 const schema = Joi.object({
-  fullName: Joi.string()
+  firstName: Joi.string()
     .regex(/^[ A-Za-z]+$/)
     .min(3)
     .max(20)
     .required()
-    .label('Your Name'),
+    .label('Your First Name'),
+  lastName: Joi.string()
+    .regex(/^[ A-Za-z]+$/)
+    .min(3)
+    .max(20)
+    .required()
+    .label('Your Last Name'),
   password: Joi.string().required().label('Password'),
   confirm_password: Joi.ref('password'),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-    })
-    .label('Email'),
+  userName: Joi.string()
+    .regex(/^[ A-Za-z]+$/)
+    .min(3)
+    .max(20)
+    .required()
+    .label('Username'),
 });
 
 async function handler(req, res) {
@@ -25,15 +32,16 @@ async function handler(req, res) {
   }
 
   const data = req.body;
-  const { fullName, email, password, confirm_password } = data;
+  const { firstName, lastName, userName, password, confirm_password } = data;
 
   let value;
   try {
     value = await schema.validateAsync({
-      fullName,
+      firstName,
+      lastName,
       password,
       confirm_password,
-      email,
+      userName,
     });
   } catch (err) {
     res.status(422).json({
@@ -45,17 +53,18 @@ async function handler(req, res) {
   try {
     const client = await clientPromise;
     const db = client.db();
-    const existingUser = await db.collection('users').findOne({ email: email });
+    const existingUser = await db.collection('users').findOne({ userName });
     if (existingUser) {
-      console.log('User existed');
-      res.status(422).json({ message: 'User exists already!' });
+      console.log('Username existed');
+      res.status(422).json({ message: 'Username already taken!' });
       return;
     }
     const hashedPassword = await encryptPassword(password);
 
     const result = await db.collection('users').insertOne({
-      fullName: fullName,
-      email: email,
+      firstName,
+      lastName,
+      userName,
       password: hashedPassword,
     });
     res.status(201).json({ message: 'Created user!', data: value });

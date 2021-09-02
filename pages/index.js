@@ -10,13 +10,13 @@ export default function RegisterUser() {
   const [loading, setLoading] = useState(false);
   const [registerStatus, setRegisterStatus] = useState(null); //to store results of registering i.e; success or failure
   const [errorMessage, setErrorMessage] = useState(null);
-  const fullName = useRef(null); //stores User's Name after successfull registration
+  const firstName = useRef(null); //stores User's Name after successfull registration
 
   const handleRegistration = async (userData) => {
     setLoading((loading) => !loading);
     try {
       const result = await createUser(userData);
-      fullName.current = result.data.fullName;
+      firstName.current = result.data.firstName;
       setRegisterStatus(true);
     } catch (error) {
       setRegisterStatus(false);
@@ -67,7 +67,7 @@ export default function RegisterUser() {
                 <RegisterStatus
                   status={registerStatus}
                   message={errorMessage}
-                  fullName={fullName.current}
+                  firstName
                 />
               ) : (
                 <RegisterForm callbackHandler={handleRegistration} />

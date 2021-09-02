@@ -21,47 +21,87 @@ const RegisterForm = ({ callbackHandler }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col pt-4">
-        <label htmlFor="name" className="text-lg">
-          Name
+        <label htmlFor="firstName" className="text-lg">
+          First Name
         </label>
         <input
           type="text"
-          {...register('fullName', {
-            required: 'Your Name is required',
+          {...register('firstName', {
+            required: 'Your First Name is required',
             maxLength: {
               value: 20,
-              message: 'Your name must be less than 20 letters',
+              message: 'Your first name must be less than 20 letters',
+            },
+            minLength: {
+              value: 3,
+              message: 'Your first should contain more than 3 letters',
             },
             pattern: {
               value: /^[A-Za-z ]+$/i,
               message: 'Only A-Z letters',
             },
           })}
-          placeholder="Parminder Singh"
+          placeholder="Parminder"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
         />
         <span className="text-red-400">
-          {errors.fullName && errors.fullName.message}
+          {errors.firstName && errors.firstName.message}
         </span>
       </div>
       <div className="flex flex-col pt-4">
-        <label htmlFor="email" className="text-lg">
-          Email
+        <label htmlFor="lastName" className="text-lg">
+          Last Name
         </label>
         <input
-          type="email"
-          {...register('email', {
-            required: 'Email is required',
+          type="text"
+          {...register('lastName', {
+            required: 'Your Last Name is required',
+            maxLength: {
+              value: 20,
+              message: 'Your last name must be less than 20 letters',
+            },
+            minLength: {
+              value: 3,
+              message: 'Your last name should contain more than 3 letters',
+            },
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: 'Enter a valid Email address',
+              value: /^[A-Za-z ]+$/i,
+              message: 'Only A-Z letters',
             },
           })}
-          placeholder="email@parmcodes.com"
+          placeholder="Singh"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
         />
         <span className="text-red-400">
-          {errors.email && errors.email.message}
+          {errors.lastName && errors.lastName.message}
+        </span>
+      </div>
+      <div className="flex flex-col pt-4">
+        <label htmlFor="userName" className="text-lg">
+          Username
+        </label>
+        <input
+          type="text"
+          {...register('userName', {
+            required: 'Username is required',
+            maxLength: {
+              value: 20,
+              message: 'Your Username must be less than 20 letters',
+            },
+            minLength: {
+              value: 3,
+              message: 'Your Username should contain more than 3 letters',
+            },
+            pattern: {
+              value: /^[A-Za-z ]+$/i,
+              message: 'Only numbers and letters are allowed.',
+            },
+          })}
+          placeholder="yourname"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+        />
+        <span className="text-red-400">
+          {errors.userName && errors.userName.message}
         </span>
       </div>
       <div className="flex flex-col pt-4">

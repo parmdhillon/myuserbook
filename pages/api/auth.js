@@ -5,8 +5,8 @@ const JWT_KEY = process.env.JWT_KEY;
 
 export default async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { userName, password } = req.body;
+    if (!userName || !password) {
       return res.status(400).json({
         message: 'Bad Request',
       });
@@ -15,7 +15,7 @@ export default async (req, res) => {
     const client = await clientPromise;
 
     const user = await client.db().collection('users').findOne({
-      email,
+      userName,
     });
 
     if (!user) {
@@ -25,7 +25,7 @@ export default async (req, res) => {
 
     if (user) {
       const userId = user._id,
-        userEmail = user.email,
+        userName = user.userName,
         userPassword = user.password;
 
       const isValid = await comparePassword(password, userPassword);
@@ -33,7 +33,7 @@ export default async (req, res) => {
       if (isValid) {
         const payload = {
           id: userId,
-          email: userEmail,
+          userName,
         };
 
         jwt.sign(

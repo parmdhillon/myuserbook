@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Router from 'next/router';
 
 import { verifyToken, getCookieToken, signoutUser } from '../lib/utils';
 
@@ -7,6 +6,13 @@ const profile = ({ profile }) => {
   return (
     <div>
       <h1>Profile</h1>
+      <button
+        onClick={() => {
+          signoutUser();
+        }}
+      >
+        Sign out
+      </button>
     </div>
   );
 };

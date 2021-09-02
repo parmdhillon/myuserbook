@@ -16,19 +16,27 @@ const LoginForm = ({ callbackHandler }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col pt-4">
-        <label htmlFor="email" className="text-lg">
-          Email
+        <label htmlFor="userName" className="text-lg">
+          Username
         </label>
         <input
-          type="email"
-          {...register('email', {
-            required: 'Email is required',
+          type="text"
+          {...register('userName', {
+            required: 'Username is required',
+            maxLength: {
+              value: 20,
+              message: 'Your Username must be less than 20 letters',
+            },
+            minLength: {
+              value: 3,
+              message: 'Your Username should contain more than 3 letters',
+            },
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: 'Enter a valid Email address',
+              value: /^[A-Za-z ]+$/i,
+              message: 'Only numbers and letters are allowed.',
             },
           })}
-          placeholder="email@parmcodes.com"
+          placeholder="username..."
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>

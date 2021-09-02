@@ -23,16 +23,16 @@ const Login = () => {
     }
   };
 
-  const getLogin = async ({ email, password }) => {
+  const getLogin = async ({ userName, password }) => {
     const loginApi = await fetch('/api/auth', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ userName, password }),
     }).catch((error) => {
-      console.error('Error:', error);
+      throw new Error(error.message || 'Something went wrong!');
     });
     let result = await loginApi.json();
     if (result.token) {
