@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner/Spinner';
 import Router from 'next/router';
 import LoginErrorCard from '../components/login/loginError';
 import { getCookieToken, verifyToken } from '../lib/utils';
+import Head from 'next/head';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
