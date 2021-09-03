@@ -23,6 +23,7 @@ const Login = () => {
       setLoginStatus(false);
       setErrorMessage(error.message);
     }
+    setLoading((loading) => !loading);
   };
 
   const getLogin = async ({ userName, password }) => {

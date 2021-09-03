@@ -210,26 +210,29 @@ const ProfileAddressCard = ({ user }) => {
             />
           </form>
         </>
-      ) : (
-        map && (
-          <>
-            <div
-              style={{
-                maxWidth: '600px',
-                height: '300px',
-                backgroundImage: `url('${map}')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-              className="flex justify-center items-center"
-            >
-              <div className="rounded-full w-3 h-3 bg-blue-600 animate-ping	flex justify-center items-center">
-                <div className="rounded-full w-3 h-3 bg-blue-600 animate-ping	"></div>
-              </div>
+      ) : map ? (
+        <>
+          <div
+            style={{
+              maxWidth: '600px',
+              height: '300px',
+              backgroundImage: `url('${map}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            className="flex justify-center items-center"
+          >
+            <div className="rounded-full w-3 h-3 bg-blue-600 animate-ping	flex justify-center items-center">
+              <div className="rounded-full w-3 h-3 bg-blue-600 animate-ping	"></div>
             </div>
-            <div className="mt-5 text-center">{address && address}</div>
-          </>
-        )
+          </div>
+          <div className="mt-5 text-center">{address && address}</div>
+        </>
+      ) : (
+        <>
+          <p className="my-5">Map not available!</p>
+          <div className="mt-5 text-center">{address && address}</div>
+        </>
       )}
     </div>
   );
