@@ -39,6 +39,9 @@ const LoginForm = ({ callbackHandler }) => {
           placeholder="username..."
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
         />
+        <span className="text-red-400">
+          {errors.userName && errors.userName.message}
+        </span>
       </div>
       <div className="flex flex-col pt-4">
         <label htmlFor="password" className="text-lg">
@@ -60,6 +63,9 @@ const LoginForm = ({ callbackHandler }) => {
           placeholder="Password"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
         />
+        <span className="text-red-400">
+          {errors.password && errors.password.message}
+        </span>
       </div>
       <input
         type="submit"
