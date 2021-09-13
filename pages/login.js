@@ -22,8 +22,9 @@ const Login = () => {
     } catch (error) {
       setLoginStatus(false);
       setErrorMessage(error.message);
+      setLoading((loading) => !loading);
     }
-    setLoading((loading) => !loading);
+
   };
 
   const getLogin = async ({ userName, password }) => {
